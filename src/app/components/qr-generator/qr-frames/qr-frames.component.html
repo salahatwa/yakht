@@ -1,0 +1,107 @@
+<div class="row" [formGroup]="form">
+
+    <div formGroupName="frameOptions">
+        <div class="selection-layout radio-type-sec">
+            <h4 class="fw-semibold">{{'collection_page_layout' | translate }}</h4>
+            <div class="row row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 g-4">
+                <div *ngFor="let item of collection_layout">
+                    <div class="selection-box text-center">
+                        <input name="shop-layout" type="radio" [id]="item.frameOptions.style"
+                            [value]="item.frameOptions.style" name="style" formControlName="style"
+                            (change)="selectItem(item)" />
+                        <label [for]="item.frameOptions.style">
+                            <div>
+                                <img [src]="item.frameOptions.image" class="img-fluid" [alt]="item.frameOptions.label">
+                            </div>
+                            <h4 class="mt-2">{{ item.frameOptions.label | translate }}</h4>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <app-form-fields [label]="'title'" [for]="'title'">
+                <input class="form-control" id="title" type="text"
+                    placeholder="{{ 'enter_title' | translate }}" formControlName="width" (blur)="update()">
+            </app-form-fields>
+
+            <app-form-fields [label]="'description'" [for]="'description'">
+                <input class="form-control" id="description" type="text"
+                    placeholder="{{ 'enter_title' | translate }}" formControlName="height" (blur)="update()">
+            </app-form-fields>
+
+
+            <app-form-fields [label]="'x'" [for]="'x'">
+                <input class="form-control" id="x" type="text"
+                    placeholder="{{ 'x' | translate }}" formControlName="x" (blur)="update()">
+            </app-form-fields>
+
+            <app-form-fields [label]="'y'" [for]="'y'">
+                <input class="form-control" id="y" type="text"
+                    placeholder="{{ 'y' | translate }}" formControlName="y" (blur)="update()">
+            </app-form-fields>
+
+        </div>
+
+        <div class="banner-image-box mt-4" formArrayName="containers">
+
+        
+
+            <ng-container *ngFor="let itemsCtrl of styleControls().controls; let i=index">
+                <ng-container [formGroupName]="i">
+                    <app-form-fields *ngIf="itemsCtrl?.value?.fill" [labelClass]="'form-label-title col-sm-3 mb-0'"
+                        [gridClass]="'col-sm-9'" [label]="'primary_color'" [for]="'primary_color'">
+                        <div class="color-box">
+                            <input class="form-control" id="fill" type="color" formControlName="fill" (blur)="update()">
+                            <h6>{{ itemsCtrl?.value?.fill}}</h6>
+                        </div>
+                    </app-form-fields>
+
+                    <app-form-fields *ngIf="itemsCtrl?.value?.stroke" [labelClass]="'form-label-title col-sm-3 mb-0'"
+                        [gridClass]="'col-sm-9'" [label]="'primary_color'" [for]="'primary_color'">
+                        <div class="color-box">
+                            <input class="form-control" id="stroke" type="color" formControlName="stroke"
+                                (blur)="update()">
+                            <h6>{{ itemsCtrl?.value?.stroke}}</h6>
+                        </div>
+                    </app-form-fields>
+
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <div class="banner-image-box mt-4" formArrayName="texts">
+            <ng-container *ngFor="let itemsCtrl of textControls().controls; let i=index">
+                <ng-container [formGroupName]="i">
+
+                    <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'" [gridClass]="'col-sm-9'"
+                        [label]="'site_title'" [for]="'site_title'">
+                        <input class="form-control" id="site_title" type="text"
+                            placeholder="{{ 'enter_site_title' | translate }}" formControlName="textContent"
+                            (blur)="update()">
+                    </app-form-fields>
+
+                    <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'" [gridClass]="'col-sm-9'"
+                        [label]="'cart_style'" [for]="'cart_style'">
+                        <select2 class="custom-select" [data]="fonts"
+                            [placeholder]="'select_mode' | translate "
+                            noResultMessage="{{ 'no_data_found' | translate }}" formControlName="fontFamily" (blur)="update()">
+                        </select2>
+                    </app-form-fields>
+
+                    <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'" [gridClass]="'col-sm-9'"
+                        [label]="'primary_color'" [for]="'primary_color'">
+                        <div class="color-box">
+                            <input class="form-control" id="fill" type="color" formControlName="fill" (blur)="update()">
+                            <h6>{{ itemsCtrl?.value?.fill}}</h6>
+                        </div>
+                    </app-form-fields>
+                </ng-container>
+            </ng-container>
+        </div>
+
+    </div>
+
+
+</div>

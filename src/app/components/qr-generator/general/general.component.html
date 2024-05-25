@@ -1,0 +1,220 @@
+<div class="row" [formGroup]="form">
+
+
+    <div class="inside-horizontal-tabs mt-0">
+        <ul ngbNav #nav_about="ngbNav" [(activeId)]="about" class="nav-tabs">
+            <li ngbNavItem="about">
+                <a ngbNavLink>{{ 'about' | translate }}</a>
+                <ng-template ngbNavContent>
+                    <app-form-fields [label]="'title'" [for]="'title'">
+                        <input class="form-control" id="title" type="text" placeholder="{{ 'enter_title' | translate }}"
+                            formControlName="width" (blur)="update()">
+                    </app-form-fields>
+
+                    <app-form-fields [label]="'description'" [for]="'description'">
+                        <input class="form-control" id="description" type="text"
+                            placeholder="{{ 'enter_title' | translate }}" formControlName="height" (blur)="update()">
+                    </app-form-fields>
+
+                    <app-form-fields [label]="'scale'" [for]="'scale'">
+                        <input class="form-control" id="scale" type="text" placeholder="{{ 'scale' | translate }}"
+                            formControlName="scale" (blur)="update()">
+                    </app-form-fields>
+
+                    <app-form-fields [label]="'rotate'" [for]="'rotate'">
+                        <input class="form-control" id="title" type="text" placeholder="{{ 'rotate' | translate }}"
+                            formControlName="rotate" (blur)="update()">
+                    </app-form-fields>
+
+                    <div formGroupName="backgroundOptions">
+                        <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'" [gridClass]="'col-sm-9'"
+                            [label]="'primary_color'" [for]="'primary_color'">
+                            <div class="color-box">
+                                <input class="form-control" id="color" type="color" formControlName="color"
+                                    (blur)="update()">
+                                <h6>{{ form.get('backgroundOptions.color').value}}</h6>
+                            </div>
+                        </app-form-fields>
+
+
+
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem="services">
+                <a ngbNavLink>{{ 'services' | translate }}</a>
+                <ng-template ngbNavContent>
+                    <div formGroupName="cornersSquareOptions">
+
+                        <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'" [gridClass]="'col-sm-9'"
+                            [label]="'primary_color'" [for]="'primary_color'">
+                            <div class="color-box">
+                                <input class="form-control" id="color" type="color" formControlName="color"
+                                    (blur)="update()">
+                                <h6>{{ form.get('cornersSquareOptions.color').value}}</h6>
+                            </div>
+                        </app-form-fields>
+
+                        <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'" [gridClass]="'col-sm-9'"
+                            [label]="'header_options'" [for]="'header_option'">
+                            <div>
+                                <ul class="radio-type-sec">
+                                    <li>
+                                        <div class="selection-box">
+                                            <input name="country-flags" type="radio" id="dot" value="dot"
+                                                name="header_options" formControlName="type" (change)="update()" />
+                                            <label for="dot">
+                                                <div>
+                                                    <img src="assets/images/theme-option/header/01.png"
+                                                        class="img-fluid dummy-img" alt="basic-header">
+                                                    <img src="assets/images/theme-option/header/1.png"
+                                                        class="img-fluid real-img" alt="basic-header">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="selection-box">
+                                            <input name="country-flags" type="radio" id="square" value="square"
+                                                name="header_options" formControlName="type" (change)="update()" />
+                                            <label for="square">
+                                                <div>
+                                                    <img src="assets/images/theme-option/header/02.png"
+                                                        class="img-fluid dummy-img" alt="classic-header">
+                                                    <img src="assets/images/theme-option/header/2.png"
+                                                        class="img-fluid real-img" alt="classic-header">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="selection-box">
+                                            <input name="country-flags" type="radio" id="extra-rounded"
+                                                value="extra-rounded" name="header_options" formControlName="type"
+                                                (change)="update()" />
+                                            <label for="extra-rounded">
+                                                <div>
+                                                    <img src="assets/images/theme-option/header/03.png"
+                                                        class="img-fluid dummy-img" alt="standard-header">
+                                                    <img src="assets/images/theme-option/header/3.png"
+                                                        class="img-fluid real-img" alt="standard-header">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </app-form-fields>
+
+
+                    </div>
+                </ng-template>
+            </li>
+          
+
+            <li ngbNavItem="dot">
+                <a ngbNavLink>{{ 'dot' | translate }}</a>
+                <ng-template ngbNavContent>
+                    <div formGroupName="dotsOptions">
+
+                        <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'" [gridClass]="'col-sm-9'"
+                            [label]="'primary_color'" [for]="'primary_color'">
+                            <div class="color-box">
+                                <input class="form-control" id="color" type="color" formControlName="color"
+                                    (blur)="update()">
+                                <h6>{{ form.get('dotsOptions.color').value}}</h6>
+                            </div>
+                        </app-form-fields>
+
+                        <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'" [gridClass]="'col-sm-9'"
+                            [label]="'dotsOptions'" [for]="'dotsOptions'">
+                            <div>
+                                <ul class="radio-type-sec">
+                                    <li>
+                                        <div class="selection-box">
+                                            <input name="country-flags" type="radio" id="dot2" value="dot"
+                                                name="dotsOptions" formControlName="type" (change)="update()" />
+                                            <label for="dot2">
+                                                <div>
+                                                    <img src="assets/images/theme-option/header/01.png"
+                                                        class="img-fluid dummy-img" alt="basic-header">
+                                                    <img src="assets/images/theme-option/header/1.png"
+                                                        class="img-fluid real-img" alt="basic-header">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="selection-box">
+                                            <input name="country-flags" type="radio" id="square2" value="square"
+                                                name="dotsOptions" formControlName="type" (change)="update()" />
+                                            <label for="square2">
+                                                <div>
+                                                    <img src="assets/images/theme-option/header/02.png"
+                                                        class="img-fluid dummy-img" alt="classic-header">
+                                                    <img src="assets/images/theme-option/header/2.png"
+                                                        class="img-fluid real-img" alt="classic-header">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="selection-box">
+                                            <input name="country-flags" type="radio" id="extra-rounded2"
+                                                value="extra-rounded" name="dotsOptions" formControlName="type"
+                                                (change)="update()" />
+                                            <label for="extra-rounded2">
+                                                <div>
+                                                    <img src="assets/images/theme-option/header/03.png"
+                                                        class="img-fluid dummy-img" alt="standard-header">
+                                                    <img src="assets/images/theme-option/header/3.png"
+                                                        class="img-fluid real-img" alt="standard-header">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    
+                                    <li>
+                                        <div class="selection-box">
+                                            <input name="country-flags" type="radio" id="classy-rounded"
+                                                value="classy-rounded" name="dotsOptions" formControlName="type"
+                                                (change)="update()" />
+                                            <label for="classy-rounded">
+                                                <div>
+                                                    <img src="assets/images/theme-option/header/03.png"
+                                                        class="img-fluid dummy-img" alt="standard-header">
+                                                    <img src="assets/images/theme-option/header/3.png"
+                                                        class="img-fluid real-img" alt="standard-header">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="selection-box">
+                                            <input name="country-flags" type="radio" id="classy"
+                                                value="classy" name="dotsOptions" formControlName="type"
+                                                (change)="update()" />
+                                            <label for="classy">
+                                                <div>
+                                                    <img src="assets/images/theme-option/header/03.png"
+                                                        class="img-fluid dummy-img" alt="standard-header">
+                                                    <img src="assets/images/theme-option/header/3.png"
+                                                        class="img-fluid real-img" alt="standard-header">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </app-form-fields>
+
+
+                    </div>
+                </ng-template>
+            </li>
+
+        </ul>
+        <div [ngbNavOutlet]="nav_about" class="mt-3"></div>
+    </div>
+
+</div>

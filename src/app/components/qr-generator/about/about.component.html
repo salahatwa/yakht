@@ -1,0 +1,91 @@
+<div class="row" [formGroup]="form">
+    <div formGroupName="about">
+        <app-form-fields [label]="'status'" [for]="'status'">
+            <div class="form-check form-switch ps-0">
+                <label class="switch">
+                    <input type="checkbox" id="status" formControlName="status">
+                    <span class="switch-state"></span>
+                </label>
+            </div>
+        </app-form-fields>
+        <app-form-fields [label]="'Left Bg Image'" [for]="'content_left_image_url'">
+            <app-image-upload [url]="true" [multipleImage]="false"
+                [helpText]="'*Upload image size 1579x241px recommended'"
+                [imageUrl]="form.get('about_us.about.content_left_image_url')?.value"
+                (selectedFiles)="selectBanner($event, 'about_us.about.content_left_image_url')">
+            </app-image-upload>
+        </app-form-fields>
+        <app-form-fields [label]="'Right Bg Image'" [for]="'content_right_image_url'">
+            <app-image-upload [url]="true" [multipleImage]="false"
+                [helpText]="'*Upload image size 1579x241px recommended'"
+                [imageUrl]="form.get('about_us.about.content_right_image_url')?.value"
+                (selectedFiles)="selectBanner($event, 'about_us.about.content_right_image_url')">
+            </app-image-upload>
+        </app-form-fields>
+        <app-form-fields [label]="'sub_title'" [for]="'meta_title'">
+            <input class="form-control" id="sub_title" type="text" placeholder="{{ 'enter_sub_title' | translate }}"
+                formControlName="sub_title">
+        </app-form-fields>
+        <app-form-fields [label]="'title'" [for]="'meta_title'">
+            <input class="form-control" id="title" type="text" placeholder="{{ 'enter_title' | translate }}"
+                formControlName="title">
+        </app-form-fields>
+        <app-form-fields [label]="'description'" [for]="'description'">
+            <textarea class="w-100" placeholder="{{ 'enter_description' | translate }}"
+                formControlName="description"></textarea>
+        </app-form-fields>
+
+        <div formArrayName="futures">
+            <app-button [class]="'btn btn-animation mb-3'" [id]="'futures_content_btn'" [spinner]="false"
+                (click)="addFuture($event)">{{ 'add_future' |
+                translate
+                }}</app-button>
+            <div class="shipping-accordion variant-accordion">
+                <ng-container>
+                    <div *ngFor="let futures of futuresContent?.controls; let i = index" [formGroupName]="i">
+                        <div class="row">
+                            <div class="col-11">
+                                <div ngbAccordion>
+                                    <div ngbAccordionItem [collapsed]="false">
+                                        <div [id]="'ngb-service-'+i" ngbAccordionHeader>
+                                            <button ngbAccordionButton> {{
+                                                futures.get('title')?.value ||
+                                                'Enter Text'
+                                                }}</button>
+                                        </div>
+                                        <div ngbAccordionCollapse>
+                                            <div ngbAccordionBody>
+                                                <ng-template>
+                                                    <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'"
+                                                        [gridClass]="'col-sm-9'" [label]="'title'" [for]="'meta_title'">
+                                                        <input class="form-control" id="title" type="text"
+                                                            placeholder="{{ 'enter_title' | translate }}"
+                                                            formControlName="title">
+                                                    </app-form-fields>
+
+                                                    <app-form-fields [labelClass]="'form-label-title col-sm-3 mb-0'"
+                                                        [gridClass]="'col-sm-9'" [label]="'icon'" [for]="'icon'">
+                                                        <app-image-upload [url]="true" [multipleImage]="false"
+                                                            [imageUrl]="futures.get('icon')?.value"
+                                                            (selectedFiles)="selectFutures($event, i)">
+                                                        </app-image-upload>
+                                                    </app-form-fields>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1 text-center fs-20">
+                                <a href="javascript:void(0)"
+                                    class="invalid-feedback text-end cursor-pointer d-inline-block w-auto mt-2"
+                                    (click)="removeFutures(i)"><i class="ri-close-line"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+    </div>
+</div>

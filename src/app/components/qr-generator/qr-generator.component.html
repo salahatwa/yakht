@@ -1,0 +1,107 @@
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-xxl-8">
+         <div class="card">
+            <div class="card pos-detail-card">
+               <div class="card-body">
+                  <div class="title-header">
+                     <div class="d-flex align-items-center">
+                        <h5>{{ 'categories' | translate }}</h5>
+                     </div>
+                  </div>
+
+                  <div class="product-details">
+
+                     <!-- Settings -->
+
+                     <form class="theme-form theme-form-2 mega-form" [formGroup]="form" (ngSubmit)="submit()">
+                        <div class="vertical-tabs">
+                           <div class="row">
+                              <div class="col-xl-3 col-lg-4">
+                                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills"
+                                    orientation="vertical">
+                                    <li ngbNavItem="general">
+                                       <a ngbNavLink><i class="ri-settings-line"></i>{{ 'general' | translate }}</a>
+                                       <ng-template ngbNavContent>
+
+                                          <app-general [form]="form" [qrcode]="qrcode"></app-general>
+
+                                       </ng-template>
+                                    </li>
+
+
+                                    <li ngbNavItem="qrframes">
+                                       <a ngbNavLink><i class="ri-settings-line"></i>{{ 'general' | translate }}</a>
+                                       <ng-template ngbNavContent>
+
+                                          <app-qr-frames [form]="form" [qrcode]="qrcode"></app-qr-frames>
+
+                                       </ng-template>
+                                    </li>
+
+                                    <li ngbNavItem="header">
+                                       <a ngbNavLink><i class="ri-layout-top-line"></i>{{ 'header' | translate }}</a>
+                                       <ng-template ngbNavContent>
+
+                                          <app-header [form]="form" [qrcode]="qrcode"></app-header>
+
+                                       </ng-template>
+                                    </li>
+
+
+
+                                 </ul>
+                              </div>
+                              <div class="col-xl-9 col-lg-8">
+                                 <div class="product-section custom-box-loader">
+                                    <div [ngbNavOutlet]="nav"></div>
+                                 </div>
+                              </div>
+
+
+
+
+                           </div>
+                        </div>
+
+                     </form>
+
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xxl-4">
+
+         <!--View QR Code-->
+         <div class="card pos-detail-card">
+            <div class="card-body">
+               <div class="title-header">
+                  <div class="d-flex align-items-center">
+                     <h5>{{ 'cart' | translate }}</h5>
+                  </div>
+               </div>
+               <div class="product-details d-flex align-items-center justify-content-center">
+                  <!-- <app-no-data [class]="'empty-cart'" [image]="'assets/svg/empty-cart.svg'"
+                     [text]="'No items in a cart'">
+                  </app-no-data> -->
+                  <div class="scroll">
+                     <blinked-qr #qrcode [template]="'ocean'" [data]="'Qr'" [width]="200" [height]="200"></blinked-qr>
+                  </div>
+
+               </div>
+
+               <ng-container *hasPermission="'order.create'">
+                  <a routerLinkActive="router-link-active" class="btn btn-animation payment-btn mt-4"
+                     (click)="onDownload(qrcode)">
+                     {{ 'proceed_to_checkout' | translate }}
+                  </a>
+               </ng-container>
+            </div>
+         </div>
+
+
+      </div>
+   </div>
+</div>
